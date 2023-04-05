@@ -49,6 +49,8 @@ class Model {
   String? _44_mchc;
   String? _45_serumIron;
   String? _46_platelet;
+  //Ver3.
+  String? _47_consultation;
 
   Model(
       this._priority, [
@@ -99,6 +101,8 @@ class Model {
         this._44_mchc = "",
         this._45_serumIron = "", //血清鉄
         this._46_platelet = "", //血小板
+        //////////Ver3
+        this._47_consultation = "",
       ]);
 
   Model.withId(
@@ -152,6 +156,8 @@ class Model {
         this._44_mchc = "",
         this._45_serumIron = "", //血清鉄
         this._46_platelet = "", //血小板
+        //////////ver3
+        this._47_consultation = ""
       ]);
 
   int? get id => _id;
@@ -203,6 +209,7 @@ class Model {
   String get mchc_44 => _44_mchc!;
   String get serumIron_45 => _45_serumIron!; //血清鉄
   String get platelet_46 => _46_platelet!; //血小板
+  String get consultation_47 => _47_consultation!;
 
   /////setter aria
   set height_1(String newHeight) {
@@ -404,6 +411,10 @@ class Model {
     _27_correctedEyesight_right = value;
   }
 
+  set consultation_47(String value){
+    _47_consultation = value;
+  }
+
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
     map['id'] = _id;
@@ -455,6 +466,7 @@ class Model {
     map['mchc'] = _44_mchc;
     map['serumIron'] = _45_serumIron;
     map['platelet'] = _46_platelet;
+    map['consultation'] = _47_consultation;
     return map;
   }
 
@@ -509,5 +521,8 @@ class Model {
     _44_mchc = map['mchc'];
     _45_serumIron = map['serumIron'];
     _46_platelet = map['platelet'];
+    _47_consultation = map['consultation'];
   }
+
+
 }
