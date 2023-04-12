@@ -66,6 +66,8 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   final mchcController = TextEditingController();
   final serumIronController = TextEditingController();
   final plateletController = TextEditingController();
+  //
+  final consultationController = TextEditingController();
 
   @override
   void initState() {
@@ -123,12 +125,12 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
-    if (onTheDayController.text == null) {
+
       onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
         print('$dateFormat');
       }
-    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.appBarTitle),
@@ -543,6 +545,25 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 },
                 decoration: InputDecoration(
                     labelText: '心電図検査所見',
+                    labelStyle: textStyle,
+                    icon: const Icon(Icons.accessibility),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+              ),
+            ),
+            //内科診察
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: TextField(
+                controller: consultationController,
+                style: textStyle,
+                //keyboardType:TextInputType.number,
+                onChanged: (value) {
+                  debugPrint('Something changed in Title Text Field');
+                  updateConsultation();
+                },
+                decoration: InputDecoration(
+                    labelText: '内科診察所見',
                     labelStyle: textStyle,
                     icon: const Icon(Icons.accessibility),
                     border: OutlineInputBorder(
@@ -1446,7 +1467,12 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   void updatePlatelet() {
     widget.model.platelet_46 = plateletController.text;
   }
+//
+  void updateConsultation(){
+    widget.model.consultation_47 = consultationController.text;
+  }
 
+  //
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
         locale: const Locale("ja"),

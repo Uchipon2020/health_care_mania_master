@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
@@ -77,36 +78,39 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    final scripts ={
-      2:['ALTER TABLE $modelTable ADD COLUMN $colWaist TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeR TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeL TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colLatenBlood TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colBloodInTheStool TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colTotalProtein TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colAlbumin TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colTotalBilirubin TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colAlp TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colUricAcid TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colReaNitrogen TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colCreatinine TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colAmylase TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colWhiteBloodCell TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colHematocrit TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colMcv TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colMch TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT'],
-      2:['ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT'],
-      3:['ALTER TABLE $modelTable ADD COLUMN $colConsultation TEXT'],
+    final scripts = {
+      '2': ['ALTER TABLE $modelTable ADD COLUMN $colWaist TEXT'],
+      '3': ['ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeR TEXT'],
+      '4': ['ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeL TEXT'],
+      '5': ['ALTER TABLE $modelTable ADD COLUMN $colLatenBlood TEXT'],
+      '6': ['ALTER TABLE $modelTable ADD COLUMN $colBloodInTheStool TEXT'],
+      '7': ['ALTER TABLE $modelTable ADD COLUMN $colTotalProtein TEXT'],
+      '8': ['ALTER TABLE $modelTable ADD COLUMN $colAlbumin TEXT'],
+      '9': ['ALTER TABLE $modelTable ADD COLUMN $colTotalBilirubin TEXT'],
+      '10': ['ALTER TABLE $modelTable ADD COLUMN $colAlp TEXT'],
+      '11': ['ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT'],
+      '12': ['ALTER TABLE $modelTable ADD COLUMN $colUricAcid TEXT'],
+      '13': ['ALTER TABLE $modelTable ADD COLUMN $colReaNitrogen TEXT'],
+      '14': ['ALTER TABLE $modelTable ADD COLUMN $colCreatinine TEXT'],
+      '15': ['ALTER TABLE $modelTable ADD COLUMN $colAmylase TEXT'],
+      '16': ['ALTER TABLE $modelTable ADD COLUMN $colWhiteBloodCell TEXT'],
+      '17': ['ALTER TABLE $modelTable ADD COLUMN $colHematocrit TEXT'],
+      '18': ['ALTER TABLE $modelTable ADD COLUMN $colMcv TEXT'],
+      '19': ['ALTER TABLE $modelTable ADD COLUMN $colMch TEXT'],
+      '20': ['ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT'],
+      '21': ['ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT'],
+      '22': ['ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT'],
+      //
+      '23': ['ALTER TABLE $modelTable ADD COLUMN $colConsultation TEXT'],
     };
     String path = '${directory.path}models.db';
     var modelsDatabase = await openDatabase(
       path,
       version: 3,
       onCreate: _createDb,
-      onUpgrade: (Database db, int oldVersion, int newVersion) async {
+      onUpgrade:_upgradeDB,
+    );
+          /*(Database db, int oldVersion, int newVersion) async {
         for (var i = oldVersion + 1; i <= newVersion; i++) {
           var queries = scripts[i.toString()];
           for (String query in queries!) {
@@ -114,8 +118,9 @@ class DatabaseHelper {
           }
         }
       },
-    );
-    //_upgradeDB);
+    );*/
+
+
     return modelsDatabase;
   }
 
@@ -139,7 +144,7 @@ class DatabaseHelper {
         ' $colSerumIron TEXT, $colPlatelet TEXT, $colConsultation TEXT)');
   }
 
-  /*void _upgradeDB(Database db, int oldVersion, int newVersion) async {
+  void _upgradeDB(Database db, int oldVersion, int newVersion) async {
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colWaist TEXT');
     await db
         .execute('ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeR TEXT');
@@ -168,9 +173,8 @@ class DatabaseHelper {
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
-    await db
-        .execute('ALTER TABLE $modelTable ADD COLUMN $colConsultation TEXT');
-  }*/
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colConsultation TEXT');
+  }
 
   Future<List<Map<String, dynamic>>> getModelMapList() async {
     Database db = await database;
