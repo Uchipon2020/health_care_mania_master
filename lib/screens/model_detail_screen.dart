@@ -66,6 +66,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   final mchcController = TextEditingController();
   final serumIronController = TextEditingController();
   final plateletController = TextEditingController();
+  final internalColntroller = TextEditingController();
 
   @override
   void initState() {
@@ -118,6 +119,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     mchcController.text = widget.model.mchc_44;
     serumIronController.text = widget.model.serumIron_45;
     plateletController.text = widget.model.platelet_46;
+    internalColntroller.text = widget.model.internal_47;
   }
 
   @override
@@ -549,6 +551,25 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                         borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
+            //内科診察
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: TextField(
+                controller: internalColntroller,
+                style: textStyle,
+                //keyboardType:TextInputType.number,
+                onChanged: (value) {
+                  debugPrint('Something changed in Title Text Field');
+                  updateEcg();
+                },
+                decoration: InputDecoration(
+                    labelText: '内科診察所見',
+                    labelStyle: textStyle,
+                    icon: const Icon(Icons.accessibility),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+              ),
+            ),
             //　血液検査関係-------------
             //血清蛋白-----------------------------------------
             ExpansionTile(
@@ -901,8 +922,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   ),
                 ]),
             //アミラーゼ
-            ExpansionTile(
-              title: const Text('アミラーゼ'),
+            ExpansionTile(title: const Text('アミラーゼ'),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -922,7 +942,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-                const Text(''),
+                const Padding(
+                  padding:  EdgeInsets.all(8.0),
+                  child:  Text(''),
+                ),
               ],
             ),
             // 空腹時血糖//糖代謝--------------------------------------
@@ -992,7 +1015,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-                const Text(''),
+                const Padding(
+                  padding:  EdgeInsets.all(8.0),
+                  child: Text(''),
+                ),
               ],
             ),
             // 6 Element　赤血球数//貧血--------------------------------------
@@ -1018,7 +1044,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-
                 // 7 Element　血色素量
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -1158,7 +1183,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-                const Text(''),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(''),
+                ),
               ],
             ),
             //便潜血
@@ -1182,14 +1210,17 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-                const Text(''),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(''),
+                ),
               ],
             ),
             /* 5 Element　削除　横並び表示
                ---------------------------------------------- */
             Padding(
               padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: Expanded(
+
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
@@ -1205,7 +1236,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     });
                   },
                 ),
-              ),
+
             ),
           ],
         ),

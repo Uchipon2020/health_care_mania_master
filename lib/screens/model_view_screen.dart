@@ -66,6 +66,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
   final mchcController = TextEditingController();
   final serumIronController = TextEditingController();
   final plateletController = TextEditingController();
+  final internalController = TextEditingController();
 
   @override
   void initState() {
@@ -118,6 +119,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
     mchcController.text = widget.model.mchc_44;
     serumIronController.text = widget.model.serumIron_45;
     plateletController.text = widget.model.platelet_46;
+    internalController.text = widget.model.internal_47;
   }
 
   @override
@@ -559,6 +561,26 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                 },
                 decoration: InputDecoration(
                     labelText: '心電図検査所見',
+                    labelStyle: textStyle,
+                    icon: const Icon(Icons.accessibility),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+              ),
+            ),
+            //内科診察
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: TextField(
+                enabled: false,
+                controller: internalController,
+                style: textStyle,
+                //keyboardType:TextInputType.number,
+                onChanged: (value) {
+                  debugPrint('Something changed in Title Text Field');
+                  updateEcg();
+                },
+                decoration: InputDecoration(
+                    labelText: '内科診察所見',
                     labelStyle: textStyle,
                     icon: const Icon(Icons.accessibility),
                     border: OutlineInputBorder(
