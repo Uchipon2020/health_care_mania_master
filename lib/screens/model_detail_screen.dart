@@ -1218,10 +1218,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
             ),
             /* 5 Element　削除　横並び表示
                ---------------------------------------------- */
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-
-                child: ElevatedButton(
+             ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                       textStyle: const TextStyle(color: Colors.red)),
@@ -1237,7 +1234,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   },
                 ),
 
-            ),
+
           ],
         ),
       ),
