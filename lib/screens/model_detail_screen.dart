@@ -97,6 +97,9 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     bGluController.text = widget.model.blood_glucose_21;
     hA1cController.text = widget.model.hA1c_22;
     eCgController.text = widget.model.ecg_23;
+    sugarController.text = widget.model.sugar_26;
+    urineController.text = widget.model.urine_25;
+
     //
     waistController.text = widget.model.waist_3;
     correctEyeRController.text = widget.model.correctedEyesightRight_27;
@@ -951,6 +954,49 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
             // 空腹時血糖//糖代謝--------------------------------------
             ExpansionTile(title: const Text('糖代謝'),
                 children: [
+                  //sugar
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: bGluController,
+                      style: textStyle,
+                      textAlign: TextAlign.right,
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        debugPrint('Something changed in Description Text Field');
+                        updateBloodglucose();
+                      },
+                      decoration: InputDecoration(
+                        labelText: '空腹時血糖',
+                        labelStyle: textStyle,
+                        suffix: const Text(' mg/dL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0)),
+                      ),
+                    ),
+                  ),
+                  //urine
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: bGluController,
+                      style: textStyle,
+                      textAlign: TextAlign.right,
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        debugPrint('Something changed in Description Text Field');
+                        updateBloodglucose();
+                      },
+                      decoration: InputDecoration(
+                        labelText: '空腹時血糖',
+                        labelStyle: textStyle,
+                        suffix: const Text(' mg/dL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0)),
+                      ),
+                    ),
+                  ),
+                  //グルコース
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
