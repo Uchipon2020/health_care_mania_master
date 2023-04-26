@@ -7,6 +7,7 @@ import '../models/model.dart';
 import '../utils/database_helper.dart';
 import 'model_detail_screen.dart';
 import 'model_view_screen.dart';
+import 'model_view_screen2.dart';
 
 class ModelListScreen extends StatefulWidget {
   const ModelListScreen({Key? key}) : super(key: key);
@@ -124,7 +125,7 @@ class ModelListScreenState extends State<ModelListScreen> {
     await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
-          return ModelViewScreen(appBarTitle: appBarTitle, model: models);
+          return ModelViewScreen2(appBarTitle: appBarTitle, model: models);
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const Offset begin = Offset(-1.0, 0.0); // 左から右
