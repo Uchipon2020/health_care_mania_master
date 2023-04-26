@@ -582,8 +582,9 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    controller: totalBilirubinController,
+                    controller: totalProteinController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -603,6 +604,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     child: TextField(
                       controller: albuminController,
                       style: textStyle,
+                      textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
                         debugPrint('Something changed in Title Text Field');
@@ -627,6 +629,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: totalBilirubinController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -686,6 +689,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: alpController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -730,6 +734,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     child: TextField(
                       controller: totalCholesterolController,
                       style: textStyle,
+                      textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
                         debugPrint('Something changed in Title Text Field');
@@ -812,6 +817,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: TextField(
                     controller: uricAcidController,
+                    textAlign: TextAlign.right,
                     style: textStyle,
                     //keyboardType:TextInputType.number,
                     onChanged: (value) {
@@ -837,6 +843,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       controller: ureaNitrogenController,
                       style: textStyle,
                       keyboardType: TextInputType.number,
+                      textAlign: TextAlign.right,
                       onChanged: (value) {
                         debugPrint('Something changed in Title Text Field');
                         updateUreaNitrogen();
@@ -854,6 +861,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     child: TextField(
                       controller: sugarController,
                       style: textStyle,
+                      textAlign: TextAlign.right,
                       //keyboardType: TextInputType.number,
                       onChanged: (value) {
                         debugPrint('Something changed in Title Text Field');
@@ -872,6 +880,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     child: TextField(
                       controller: urineController,
                       style: textStyle,
+                      textAlign: TextAlign.right,
                       //keyboardType: TextInputType.number,
                       onChanged: (value) {
                         debugPrint('Something changed in Title Text Field');
@@ -892,6 +901,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     child: TextField(
                       controller: creatinineController,
                       style: textStyle,
+                      textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
                         debugPrint('Something changed in Title Text Field');
@@ -932,6 +942,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: amylaseController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     //keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -976,47 +987,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ),
                   ),
                   //urine
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: bGluController,
-                      style: textStyle,
-                      textAlign: TextAlign.right,
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        debugPrint('Something changed in Description Text Field');
-                        updateBloodglucose();
-                      },
-                      decoration: InputDecoration(
-                        labelText: '空腹時血糖',
-                        labelStyle: textStyle,
-                        suffix: const Text(' mg/dL'),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                      ),
-                    ),
-                  ),
-                  //グルコース
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: bGluController,
-                      style: textStyle,
-                      textAlign: TextAlign.right,
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        debugPrint('Something changed in Description Text Field');
-                        updateBloodglucose();
-                      },
-                      decoration: InputDecoration(
-                        labelText: '空腹時血糖',
-                        labelStyle: textStyle,
-                        suffix: const Text(' mg/dL'),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                      ),
-                    ),
-                  ),
+
                   // A1c
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -1049,6 +1020,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     controller: whiteBloodCellController,
                     style: textStyle,
                     keyboardType: TextInputType.number,
+                    textAlign: TextAlign.right,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateWhiteBloodCell();
@@ -1116,6 +1088,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: hematocritController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     //keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -1135,6 +1108,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: mcvController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -1152,15 +1126,16 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    controller: mcvController,
+                    controller: mchController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateEcg();
+                      updateMch();
                     },
                     decoration: InputDecoration(
-                        labelText: 'MCV',
+                        labelText: 'MCH',
                         labelStyle: textStyle,
                         suffix: const Text(' fL'),
                         border: OutlineInputBorder(
@@ -1173,6 +1148,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: mchcController,
                     style: textStyle,
+                    textAlign: TextAlign.right,
                     //keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -1193,6 +1169,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     controller: serumIronController,
                     style: textStyle,
                     keyboardType: TextInputType.number,
+                    textAlign: TextAlign.right,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateEcg();
@@ -1217,6 +1194,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     controller: plateletController,
                     style: textStyle,
                     //keyboardType:TextInputType.number,
+                    textAlign: TextAlign.right,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updatePlatelet();
@@ -1280,8 +1258,8 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   },
                 ),
 
-
           ],
+
         ),
       ),
       floatingActionButton: FloatingActionButton(
