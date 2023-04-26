@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
@@ -62,7 +61,7 @@ class DatabaseHelper {
   String colSerumIron = 'serumIron';
   String colPlatelet = 'platelet';
   /////ver3
-  String colConsultation = 'consultation';
+  String colInternal = 'internal';
 
   DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
 
@@ -101,7 +100,7 @@ class DatabaseHelper {
       '21': ['ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT'],
       '22': ['ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT'],
       //
-      '23': ['ALTER TABLE $modelTable ADD COLUMN $colConsultation TEXT'],
+      '23': ['ALTER TABLE $modelTable ADD COLUMN $colInternal TEXT'],
     };
     String path = '${directory.path}models.db';
     var modelsDatabase = await openDatabase(
@@ -141,7 +140,7 @@ class DatabaseHelper {
         ' $colAlbumin TEXT, $colTotalBilirubin TEXT, $colAlp TEXT, $colTotalCholesterol TEXT,' //
         ' $colUricAcid TEXT, $colReaNitrogen TEXT, $colCreatinine TEXT, $colAmylase TEXT,'
         ' $colWhiteBloodCell TEXT, $colHematocrit TEXT, $colMcv TEXT, $colMch TEXT, $colMchc TEXT,'
-        ' $colSerumIron TEXT, $colPlatelet TEXT, $colConsultation TEXT)');
+        ' $colSerumIron TEXT, $colPlatelet TEXT, $colInternal TEXT)');
   }
 
   void _upgradeDB(Database db, int oldVersion, int newVersion) async {
@@ -173,7 +172,7 @@ class DatabaseHelper {
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colConsultation TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colInternal TEXT');
   }
 
   Future<List<Map<String, dynamic>>> getModelMapList() async {

@@ -1469,7 +1469,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   }
 //
   void updateConsultation(){
-    widget.model.consultation_47 = consultationController.text;
+    widget.model.internal_47 = consultationController.text;
   }
 
   //
