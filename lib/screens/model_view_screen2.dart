@@ -79,16 +79,16 @@ class _ModelViewScreen2State extends State<ModelViewScreen2>{
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.appBarTitle} : ${widget.model.on_the_day_24}実施分'),
+        title: Text('${widget.appBarTitle} : ${widget.model.on_the_day_24} 実施分'),
       ),
     body: Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: [
           Text('検査種別: ${modelViews[99]!}'),
-        Text('身長: ${modelViews[1]!}cm'),
-          Text('体重: ${modelViews[2]!}kg'),
-          Text('腹囲: ${modelViews[3]!}cm'),
+        Text('身長: ${modelViews[1]!} cm'),
+          Text('体重: ${modelViews[2]!} kg'),
+          Text('腹囲: ${modelViews[3]!} cm'),
           Row(
             children: [
               Text('右目（裸眼）：${modelViews[4]!}'),
@@ -97,38 +97,61 @@ class _ModelViewScreen2State extends State<ModelViewScreen2>{
           ),
           Row(
             children: [
-              Text('右目（矯正）：${modelViews[6]!}'),
-              Text('/ 左目（矯正）：${modelViews[7]!}'),
+              Text('右目（矯正）：${modelViews[27]!}'),
+              Text('/ 左目（矯正）：${modelViews[28]!}'),
             ],
           ),
 
           Row(
             children: [
-              Text('右聴力 1000Mz：${modelViews[8]!}'),
-              Text('/ 左聴力 1000Mz：${modelViews[9]!}'),
+              Text('右聴力 1000Mz：${modelViews[6]!}'),
+              Text('/ 左聴力 1000Mz：${modelViews[7]!}'),
             ],
           ),
 
           Row(
             children: [
-              Text('右聴力 4000Mz：${modelViews[10]!}'),
-              Text('/ 左聴力 4000Mz：${modelViews[11]!}'),
+              Text('右聴力 4000Mz：${modelViews[8]!}'),
+              Text('/ 左聴力 4000Mz：${modelViews[9]!}'),
             ],
           ),
 
-          Text('血圧（下・拡張期）: ${modelViews[12]!}mmHg'),
-          Text('血圧（上・収縮機）: ${modelViews[13]!}mmHg'),
-          Text('X-線検査：${modelViews[14]!}'),
-          Text('心電図検査所見：${modelViews[15]!}'),
-          Text('内科診察所見：${modelViews[16]!}'),
-          Text('総蛋白：${modelViews[17]!}g/dL'),
-          Text('アルブミン：${modelViews[18]!} g/dL'),
-          Text('総ビリルビン：${modelViews[19]!} mg/dL'),
-          Text('GOT（ALT)：${modelViews[20]!} U/L'),
-          Text('GPT（AST)：${modelViews[21]!} U/L'),
-          Text('ALP：${modelViews[22]!} U/L'),
-          Text('γ-GTP：${modelViews[23]!} U/L'),
-          Text('ALP：${modelViews[25]!} mg/dL'),
+          Text('血圧（下・拡張期）: ${modelViews[11]!} mmHg'),
+          Text('血圧（上・収縮機）: ${modelViews[12]!} mmHg'),
+          Text('X-線検査：${modelViews[10]!}'),
+          Text('心電図検査所見：${modelViews[23]!}'),
+          Text('内科診察所見：${modelViews[47]!}'),
+          Text('総蛋白：${modelViews[31]!}g/dL'),
+          Text('アルブミン：${modelViews[32]!} g/dL'),
+          Text('総ビリルビン：${modelViews[33]!} mg/dL'),
+          Text('GOT（ALT)：${modelViews[15]!} U/L'),
+          Text('GPT（AST)：${modelViews[16]!} U/L'),
+          Text('ALP：${modelViews[34]!} U/L'),
+          Text('γ-GTP：${modelViews[17]!} U/L'),
+
+          Text('総コレステロール：${modelViews[35]!} mg/dL'),
+          Text('ＬＤＬ: ${modelViews[18]!} mg/dL'),
+          Text('ＨＤＬ: ${modelViews[19]!} mg/dL'),
+          Text('中性脂肪：${modelViews[20]!} mg/dL'),
+          Text('尿酸：${modelViews[36]!}'),
+          Text('尿素窒素：${modelViews[37]!} mg/dL'),
+          Text('尿糖：${modelViews[26]!}'),
+          Text('尿蛋白：${modelViews[25]!}'),
+          Text('クレアチニン：${modelViews[38]!} mg/dL'),
+          Text('尿潜血：${modelViews[29]!}'),
+          Text('アミラーゼ：${modelViews[39]!} U/L'),
+          Text('空腹時血糖：${modelViews[21]!} mg/dL'),
+          Text('ｈＡ１ｃ：${modelViews[22]!} %'),
+          Text('白血球数: ${modelViews[40]!} /μL'),
+          Text('赤血球数: ${modelViews[13]!} 万/μL'),
+          Text('血色素量：${modelViews[14]!} g/dL'),
+          Text('ヘマトクリット：${modelViews[41]!} %'),
+          Text('ＭＣＶ：${modelViews[42]!} fL'),
+          Text('ＭＣＨ：${modelViews[43]!} fL'),
+          Text('ＭＣＨＣ：${modelViews[44]!} %'),
+          Text('血清鉄：${modelViews[45]!} μg/dL'),
+          Text('血小板：${modelViews[46]!}  万/μL'),
+          Text('便潜血：${modelViews[30]!}'),
 
         ]
       ),

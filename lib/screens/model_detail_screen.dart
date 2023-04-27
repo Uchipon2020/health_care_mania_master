@@ -1177,7 +1177,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     decoration: InputDecoration(
                         labelText: '血清鉄',
                         labelStyle: textStyle,
-                        suffix: const Text('μg/dL'),
+                        suffix: const Text('　μg/dL'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
@@ -1201,7 +1201,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     },
                     decoration: InputDecoration(
                         labelText: '血小板数',
-                        suffix: const Text(' 万/'),
+                        suffix: const Text(' 万/μL'),
                         labelStyle: textStyle,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
