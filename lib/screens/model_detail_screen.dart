@@ -716,7 +716,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       updateGtp();
                     },
                     decoration: InputDecoration(
-                        labelText: 'ガンマGPT',
+                        labelText: 'ガンマGTP',
                         labelStyle: textStyle,
                         suffix: const Text(' U/L'),
                         border: OutlineInputBorder(
