@@ -6,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
 import '../utils/database_helper.dart';
 import 'model_detail_screen.dart';
-import 'model_view_screen.dart';
 import 'model_view_screen2.dart';
 
 class ModelListScreen extends StatefulWidget {
