@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
 
+
+//データベースとのやり取りを、別クラスにした
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper; // Singleton DatabaseHelper
   static Database? _database; // Singleton Database
@@ -62,8 +65,7 @@ class DatabaseHelper {
   String colPlatelet = 'platelet';
   String colInternal = 'internal';
 
-  DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
-
+  DatabaseHelper._createInstance(); //
   factory DatabaseHelper() {
     _databaseHelper ??= DatabaseHelper._createInstance();
     return _databaseHelper!;
@@ -106,29 +108,43 @@ class DatabaseHelper {
   }
 
   void _upgradeDB(Database db, int oldVersion, int newVersion) async {
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colWaist TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeR TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeL TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colLatenBlood TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBloodInTheStool TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalProtein TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlbumin TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalBilirubin TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlp TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT');//
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colUricAcid TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colReaNitrogen TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCreatinine TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAmylase TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colWhiteBloodCell TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colHematocrit TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMcv TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMch TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
-    await db.execute('ALTER TABEL $modelTable ADD COLUMN $colInternal TEXT');
-  }
+    try {
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colWaist TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeR TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeL TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colLatenBlood TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colBloodInTheStool TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colTotalProtein TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlbumin TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colTotalBilirubin TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlp TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT'); //
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colUricAcid TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colReaNitrogen TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colCreatinine TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAmylase TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colWhiteBloodCell TEXT');
+      await db.execute(
+          'ALTER TABLE $modelTable ADD COLUMN $colHematocrit TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMcv TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMch TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
+      await db.execute('ALTER TABEL $modelTable ADD COLUMN $colInternal TEXT');
+    } catch (e){if (kDebugMode) {
+      print("Error during upgrading: $e");
+    }}}
 
   Future<List<Map<String, dynamic>>> getModelMapList() async {
     Database db = await database;

@@ -2,7 +2,7 @@ name: healthcare_mania_legacy_new
 description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.2.0+4
+version: 2.4.0+10
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
@@ -18,6 +18,7 @@ dependencies:
   path_provider: ^2.0.11
   intl: ^0.17.0
   flutter_charts: ^0.5.1
+  fl_chart: ^0.62.0
 
 
 dev_dependencies:
