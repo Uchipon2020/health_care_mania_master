@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../models/model.dart';
 
 class Graph1 extends StatefulWidget {
@@ -13,11 +13,14 @@ class Graph1 extends StatefulWidget {
 }
 
 class _Graph1State extends State<Graph1> {
+  List<double>? weightDataList;
+  List<String>? xAxisLabels;
+
   late FlTitlesData _titles;
   final TextStyle _labelStyle =
-  const TextStyle(fontSize: 13, fontWeight: FontWeight.w800);
+      const TextStyle(fontSize: 13, fontWeight: FontWeight.w800);
   final TextStyle _titleStyle =
-  const TextStyle(fontSize: 20, fontWeight: FontWeight.w800);
+      const TextStyle(fontSize: 20, fontWeight: FontWeight.w800);
 
   void _initChartTitle() {
     _titles = FlTitlesData(
@@ -29,10 +32,10 @@ class _Graph1State extends State<Graph1> {
           axisNameSize: 48),
       rightTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: false,
-          )),
+        showTitles: false,
+      )),
       bottomTitles: AxisTitles(
-        sideTitles: _bottomTitles(),
+        sideTitles: _bottomTitles,
         axisNameWidget: Container(
           alignment: Alignment.centerRight,
           child: Text(
@@ -50,7 +53,8 @@ class _Graph1State extends State<Graph1> {
                 style: const TextStyle(
                   color: Colors.black, // ラベルのテキスト色を指定
                   fontSize: 12, // ラベルのフォントサイズを指定
-                ),); // X軸のラベル // Y軸のラベルを整数にフォーマット
+                ),
+              ); // X軸のラベル // Y軸のラベルを整数にフォーマット
             },
           ),
           axisNameWidget: Text(
@@ -61,42 +65,49 @@ class _Graph1State extends State<Graph1> {
     );
   }
 
-  SideTitles _bottomTitles() => SideTitles(
-      showTitles: true,
-      reservedSize: 32,
-      interval: 1,
-      getTitlesWidget: (value, _) {
-        return Text(
-          value.toStringAsFixed(0),
-          style: const TextStyle(
-            color: Colors.black, // ラベルのテキスト色を指定
-            fontSize: 12, // ラベルのフォントサイズを指定
-          ),); // X軸のラベルを整数にフォーマット
-      });
+  SideTitles get _bottomTitles => SideTitles(
+        showTitles: true,
+        reservedSize: 50,
+        getTitlesWidget: (value, meta) {
+          String text = '';
+          List<String> xAxisLabels = _getXAxisLabels();
+          if (value >= 0 && value < xAxisLabels.length) {
+            text = xAxisLabels[value.toInt()];
+          }
+          return Text(text);
+        },
+        interval: 1,
+      );
+
+  List<String> _getXAxisLabels() {
+    List<String> xAxisLabels = [];
+    for (int i = 0; i < weightDataList!.length; i++) {
+      String dateStr = widget.modelList![i].on_the_day_24; // 'date' フィールドから日付文字列を取得
+      DateTime originalData = DateFormat('yyyy年M月d日').parse(dateStr);
+      String formattedDatSter = DateFormat('yyyy.MM.dd').format(originalData);
+      xAxisLabels.add(formattedDatSter);
+    }
+    return xAxisLabels;
+  }
 
   @override
   void initState() {
     super.initState();
+    _generateDataLists();
     _initChartTitle();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<int>? weightDataList = widget.modelList
-        ?.where((model) => model.weight_2.isNotEmpty)
-        .map((model) => int.tryParse(model.weight_2) ?? 0)
-        .toList();
-
     List<FlSpot> flSpotList = [];
     for (int i = 0; i < weightDataList!.length; i++) {
-      double yValue = weightDataList[i].toDouble();
-
+      double yValue = weightDataList![i].toDouble();
       flSpotList.add(FlSpot(i.toDouble(), yValue));
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Line Chart"),
+        title: const Text("グラフ"),
       ),
       body: Center(
         child: Column(
@@ -110,9 +121,11 @@ class _Graph1State extends State<Graph1> {
                   backgroundColor: Colors.grey[200],
                   titlesData: _titles,
                   minX: 0, // 最小のX軸値
-                  maxX: weightDataList.length - 1.toDouble(), // 最大のX軸値
+                  maxX: weightDataList!.length - 1.toDouble(), // 最大のX軸値
                   minY: 0, // 最小のY軸値
-                  maxY: weightDataList.reduce((a, b) => a > b ? a : b).toDouble(), // 最大のY軸値
+                  maxY: weightDataList
+                      ?.reduce((a, b) => a > b ? a : b)
+                      .toDouble(), // 最大のY軸値
                   lineBarsData: [
                     LineChartBarData(
                       isCurved: true,
@@ -127,4 +140,19 @@ class _Graph1State extends State<Graph1> {
         ),
       ),
     );
-  }}
+  }
+
+  void _generateDataLists() {
+    // weightDataListの生成
+    weightDataList = widget.modelList!
+        .where((model) => model.weight_2.isNotEmpty)
+        .map((model) => double.tryParse(model.weight_2) ?? 0.0)
+        .toList();
+
+    // xAxisLabelsの生成
+    xAxisLabels = widget.modelList!
+        .where((model) => model.weight_2.isNotEmpty)
+        .map((model) => model.on_the_day_24)
+        .toList();
+  }
+}
