@@ -51,7 +51,11 @@ class ModelListScreenState extends State<ModelListScreen> {
   ];
 
   void _onItemTapped(int index) {
-
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => Graph1(modelList: modelList)),
+      );
+    
     setState(() {
       _selectedIndex = index;
     });
@@ -76,7 +80,7 @@ class ModelListScreenState extends State<ModelListScreen> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => Graph1(modelWeight: modelList)),
+                        builder: (context) => Graph1(modelList: modelList)),
                   );
                 },
                 //enabled: _modelDataCheck(_isEnabled),
@@ -128,6 +132,7 @@ class ModelListScreenState extends State<ModelListScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: 'Business',
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
