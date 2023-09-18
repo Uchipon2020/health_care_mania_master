@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:healthcare_mania_legacy_new/screens/weight_graph1.dart';
-import 'package:healthcare_mania_legacy_new/screens/widget_graph2.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
 import '../utils/database_helper.dart';
+import 'graph/weight_graph.dart';
 import 'model_detail_screen.dart';
-import 'model_view_screen2.dart';
+import 'model_view_screen.dart';
 
 class ModelListScreen extends StatefulWidget {
   const ModelListScreen({Key? key}) : super(key: key);
@@ -25,14 +23,14 @@ class ModelListScreenState extends State<ModelListScreen> {
   List<Model>? modelListBloodHight;
   List<Model>? modelListBloodLow;
   int count = 0;
-  int weightCount = 0;
+  /*int weightCount = 0;
   int bloodHeightCount = 0;
   int bloodLowCount = 0;
   final bool _isEnabled = true;
-  final bool _isEnabled2 = true;
+  final bool _isEnabled2 = true;*/
 
 
-  int _selectedIndex = 0;
+ /* int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -53,13 +51,13 @@ class ModelListScreenState extends State<ModelListScreen> {
   void _onItemTapped(int index) {
       Navigator.of(context).push(
         MaterialPageRoute(
-            builder: (context) => Graph1(modelList: modelList)),
+            builder: (context) => WeightGraph(modelList: modelList)),
       );
     
     setState(() {
       _selectedIndex = index;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +70,7 @@ class ModelListScreenState extends State<ModelListScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('HEALTHCARE MANIA'), actions: [
-        PopupMenuButton(
+        /*PopupMenuButton(
           icon: const Icon(Icons.auto_graph_sharp),
           itemBuilder: (context) {
             return [
@@ -80,7 +78,7 @@ class ModelListScreenState extends State<ModelListScreen> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => Graph1(modelList: modelList)),
+                        builder: (context) => WeightGraph(modelList: modelList)),
                   );
                 },
                 //enabled: _modelDataCheck(_isEnabled),
@@ -103,7 +101,7 @@ class ModelListScreenState extends State<ModelListScreen> {
                     : () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Graph2(),
+                            builder: (context) => WeightGraph(modelList: modelList,),
                           ),
                         );
                       },
@@ -111,7 +109,7 @@ class ModelListScreenState extends State<ModelListScreen> {
               ),
             ];
           },
-        ),
+        ),*/
         PopupMenuButton<Text>(
           itemBuilder: (context) {
             return [
@@ -123,7 +121,7 @@ class ModelListScreenState extends State<ModelListScreen> {
         ),
       ]),
       body: getModelListView(),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -142,7 +140,7 @@ class ModelListScreenState extends State<ModelListScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-      ),
+      ),*/
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
@@ -259,7 +257,7 @@ class ModelListScreenState extends State<ModelListScreen> {
     );
   }
 
-  bool _modelDataCheck(check) {
+  /*bool _modelDataCheck(check) {
     updateListView();
     if (weightCount == 0) {
       check = false;
@@ -267,16 +265,16 @@ class ModelListScreenState extends State<ModelListScreen> {
       check = true;
     }
     return check;
-  }
+  }*/
 
-  bool _modelDataCheck2(check) {
+  /*bool _modelDataCheck2(check) {
     if (bloodHeightCount == 0 && bloodLowCount == 0) {
       check = false;
     } else {
       check = true;
     }
     return check;
-  }
+  }*/
 
   void updateListView() {
     final Future<Database> dbFuture =

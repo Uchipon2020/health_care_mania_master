@@ -2,17 +2,18 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/model.dart';
 
-class Graph1 extends StatefulWidget {
+import '../../models/model.dart';
+
+class WeightGraph extends StatefulWidget {
   List<Model>? modelList;
-  Graph1({required this.modelList, Key? key}) : super(key: key);
+  WeightGraph({required this.modelList, Key? key}) : super(key: key);
 
   @override
-  State<Graph1> createState() => _Graph1State();
+  State<WeightGraph> createState() => _WeightGraphState();
 }
 
-class _Graph1State extends State<Graph1> {
+class _WeightGraphState extends State<WeightGraph> {
   List<double>? weightDataList;
   List<String>? xAxisLabels;
 
