@@ -1,45 +1,45 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../models/model.dart';
 
 class Graph1 extends StatefulWidget {
-  List<Model>? modelWeight;
   List<Model>? modelList;
-  Graph1( {required this.modelWeight , Key? key}) : super(key: key);
+  Graph1({required this.modelList, Key? key}) : super(key: key);
 
   @override
   State<Graph1> createState() => _Graph1State();
 }
 
 class _Graph1State extends State<Graph1> {
+  List<double>? weightDataList;
+  List<String>? xAxisLabels;
+
   late FlTitlesData _titles;
   final TextStyle _labelStyle =
-  const TextStyle(fontSize: 16, fontWeight: FontWeight.w800);
+      const TextStyle(fontSize: 13, fontWeight: FontWeight.w800);
   final TextStyle _titleStyle =
-  const TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
-
-  // modelWeightリストをMapのリストに変換
-  late List<dynamic> nonNullBValues;
+      const TextStyle(fontSize: 20, fontWeight: FontWeight.w800);
 
   void _initChartTitle() {
     _titles = FlTitlesData(
       topTitles: AxisTitles(
           axisNameWidget: Text(
-            "2021 Tokyo Avg Temperature",
+            "Your Weight Data",
             style: _titleStyle,
           ),
           axisNameSize: 48),
       rightTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: false,
-          )),
+        showTitles: false,
+      )),
       bottomTitles: AxisTitles(
-        sideTitles: _bottomTitles(),
+        sideTitles: _bottomTitles,
         axisNameWidget: Container(
           alignment: Alignment.centerRight,
           child: Text(
-            "month",
+            "登録日",
             style: _labelStyle,
           ),
         ),
@@ -47,86 +47,70 @@ class _Graph1State extends State<Graph1> {
       leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            getTitlesWidget: (value, meta) => Text(
-              value.toInt().toString(),
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
+            getTitlesWidget: (value, titleMeta) {
+              return Text(
+                value.toStringAsFixed(0),
+                style: const TextStyle(
+                  color: Colors.black, // ラベルのテキスト色を指定
+                  fontSize: 12, // ラベルのフォントサイズを指定
+                ),
+              ); // X軸のラベル // Y軸のラベルを整数にフォーマット
+            },
           ),
           axisNameWidget: Text(
-            "temperature",
+            "Weight(kg)",
             style: _labelStyle,
           ),
           axisNameSize: 32),
     );
   }
 
-  SideTitles _bottomTitles() => SideTitles(
-      showTitles: true,
-      reservedSize: 24,
-      interval: 1,
-      getTitlesWidget: (month, meta) {
-        const style = TextStyle(
-          color: Color(0xff72719b),
-          fontWeight: FontWeight.bold,
-          fontSize: 12,
-        );
-        String text;
+  SideTitles get _bottomTitles => SideTitles(
+        showTitles: true,
+        reservedSize: 50,
+        getTitlesWidget: (value, meta) {
+          String text = '';
+          List<String> xAxisLabels = _getXAxisLabels();
+          if (value >= 0 && value < xAxisLabels.length) {
+            text = xAxisLabels[value.toInt()];
+          }
+          return Text(text);
+        },
+        interval: 1,
+      );
 
-        if (month.toInt() < 1 || month.toInt() > 12) {
-          text = "";
-        } else {
-          text = "${month.toInt()}";
-        }
-
-        return SideTitleWidget(
-          axisSide: meta.axisSide,
-          space: 10,
-          child: Text(
-            text,
-            style: style,
-          ),
-        );
-      });
+  List<String> _getXAxisLabels() {
+    List<String> xAxisLabels = [];
+    for (int i = 0; i < weightDataList!.length; i++) {
+      String dateStr = widget.modelList![i].on_the_day_24; // 'date' フィールドから日付文字列を取得
+      DateTime originalData = DateFormat('yyyy年M月d日').parse(dateStr);
+      String formattedDatSter = DateFormat('yyyy.MM.dd').format(originalData);
+      xAxisLabels.add(formattedDatSter);
+    }
+    return xAxisLabels;
+  }
 
   @override
   void initState() {
     super.initState();
+    _generateDataLists();
     _initChartTitle();
-    nonNullBValues = widget.modelWeight
-        ?.map((model) => model.weight_2)
-        .where((weight) => weight != null)// Modelクラスのweightプロパティを取得
-    .toList() ?? [];
-
   }
 
   @override
   Widget build(BuildContext context) {
-    nonNullBValues
-        .where((map) => map['weight'] != null)
-        .map((map) => map['weight'])
-        .toList();
-
-    // nonNullBValuesをFlSpotのリストに変換
     List<FlSpot> flSpotList = [];
-    for (int i = 0; i < nonNullBValues.length; i++) {
-    // X軸（時間など）を指定する場合、iを使用するか、適切な値を設定します
-    double xValue = i.toDouble();
-    // Y軸（'weight' データ）を指定
-    double yValue = nonNullBValues[i].toDouble(); // もしくは必要な型変換を行う
-
-    // FlSpotを作成してリストに追加
-    flSpotList.add(FlSpot(xValue, yValue));
+    for (int i = 0; i < weightDataList!.length; i++) {
+      double yValue = weightDataList![i].toDouble();
+      flSpotList.add(FlSpot(i.toDouble(), yValue));
     }
-
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Line Chart"),
+        title: const Text("グラフ"),
       ),
       body: Center(
-    child: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
@@ -136,10 +120,12 @@ class _Graph1State extends State<Graph1> {
               child: LineChart(LineChartData(
                   backgroundColor: Colors.grey[200],
                   titlesData: _titles,
-                  minX: 1,
-                  maxX: 12,
-                  minY: 0,
-                  maxY: 30,
+                  minX: 0, // 最小のX軸値
+                  maxX: weightDataList!.length - 1.toDouble(), // 最大のX軸値
+                  minY: 0, // 最小のY軸値
+                  maxY: weightDataList
+                      ?.reduce((a, b) => a > b ? a : b)
+                      .toDouble(), // 最大のY軸値
                   lineBarsData: [
                     LineChartBarData(
                       isCurved: true,
@@ -155,5 +141,18 @@ class _Graph1State extends State<Graph1> {
       ),
     );
   }
-}
 
+  void _generateDataLists() {
+    // weightDataListの生成
+    weightDataList = widget.modelList!
+        .where((model) => model.weight_2.isNotEmpty)
+        .map((model) => double.tryParse(model.weight_2) ?? 0.0)
+        .toList();
+
+    // xAxisLabelsの生成
+    xAxisLabels = widget.modelList!
+        .where((model) => model.weight_2.isNotEmpty)
+        .map((model) => model.on_the_day_24)
+        .toList();
+  }
+}
