@@ -103,6 +103,20 @@ class _BloodPressureGraphState extends State<BloodPressureGraph> {
   Widget build(BuildContext context) {
     List<FlSpot> highflSpotList = [];
     List<FlSpot> lowflSpotList = [];
+
+    if (highBloodPressureDataList == null || highBloodPressureDataList!.isEmpty ||
+        lowBloodPressureDataList == null || lowBloodPressureDataList!.isEmpty) {
+      // グラフデータが空の場合、エラーメッセージを表示するか、他の処理を行う
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("グラフ"),
+        ),
+        body: const Center(
+          child: Text("グラフデータがありません。"),
+        ),
+      );
+    }
+
     for (int i = 0; i < highBloodPressureDataList!.length; i++) {
       double yValue = highBloodPressureDataList![i].toDouble();
       highflSpotList.add(FlSpot(i.toDouble(), yValue));

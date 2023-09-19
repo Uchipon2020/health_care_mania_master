@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
 import '../utils/database_helper.dart';
-import 'graph/weight_graph.dart';
 import 'model_detail_screen.dart';
 import 'model_view_screen.dart';
 
@@ -23,44 +22,15 @@ class ModelListScreenState extends State<ModelListScreen> {
   List<Model>? modelListBloodHight;
   List<Model>? modelListBloodLow;
   int count = 0;
-  /*int weightCount = 0;
+  int weightCount = 0;
   int bloodHeightCount = 0;
   int bloodLowCount = 0;
-  final bool _isEnabled = true;
-  final bool _isEnabled2 = true;*/
 
 
- /* int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (context) => WeightGraph(modelList: modelList)),
-      );
-    
-    setState(() {
-      _selectedIndex = index;
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
+
     if (modelList == null) {
       //listが空ならば。基本的に最初はからなので、空白のmodelListが作成される
       modelList = <Model>[];
@@ -70,46 +40,6 @@ class ModelListScreenState extends State<ModelListScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('HEALTHCARE MANIA'), actions: [
-        /*PopupMenuButton(
-          icon: const Icon(Icons.auto_graph_sharp),
-          itemBuilder: (context) {
-            return [
-              PopupMenuItem(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => WeightGraph(modelList: modelList)),
-                  );
-                },
-                //enabled: _modelDataCheck(_isEnabled),
-
-                /*onTap: _isEnabled2 ? () {const InkWell(onTap: null);} : () {Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Graph1(modelWeight: modelList),
-                          ),
-                        );
-                      },*/
-                child: const Text("体重グラフ"),
-              ),
-              PopupMenuItem(
-                enabled: _modelDataCheck2(_isEnabled2),
-                onTap: _isEnabled
-                    ? () {
-                        const InkWell(onTap: null);
-                      }
-                    : () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => WeightGraph(modelList: modelList,),
-                          ),
-                        );
-                      },
-                child: const Text("血圧グラフ"),
-              ),
-            ];
-          },
-        ),*/
         PopupMenuButton<Text>(
           itemBuilder: (context) {
             return [
@@ -120,27 +50,9 @@ class ModelListScreenState extends State<ModelListScreen> {
           },
         ),
       ]),
-      body: getModelListView(),
-      /*bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
 
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),*/
+      body: getModelListView(),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
@@ -153,6 +65,13 @@ class ModelListScreenState extends State<ModelListScreen> {
   }
 
   ListView getModelListView() {
+    // モデルリストを日付順にソート
+    modelList!.sort((a, b) {
+      DateTime dateA = _parseJapaneseDate(a.on_the_day_24);
+      DateTime dateB = _parseJapaneseDate(b.on_the_day_24);
+      return dateA.compareTo(dateB);
+    });
+
     return ListView.builder(
       itemCount: count,
       itemBuilder: (BuildContext context, int position) {
@@ -257,25 +176,6 @@ class ModelListScreenState extends State<ModelListScreen> {
     );
   }
 
-  /*bool _modelDataCheck(check) {
-    updateListView();
-    if (weightCount == 0) {
-      check = false;
-    } else {
-      check = true;
-    }
-    return check;
-  }*/
-
-  /*bool _modelDataCheck2(check) {
-    if (bloodHeightCount == 0 && bloodLowCount == 0) {
-      check = false;
-    } else {
-      check = true;
-    }
-    return check;
-  }*/
-
   void updateListView() {
     final Future<Database> dbFuture =
         databaseHelper.initializeDatabase(); //イニシャライズとは、初期化
@@ -286,11 +186,22 @@ class ModelListScreenState extends State<ModelListScreen> {
         setState(() {
           modelList = modelsList.cast<Model>();
           count = modelsList.length;
-          //weightCount = modelsList.where((map) => map['weight'] != null).length;
-          //bloodHeightCount = modelsList.where((map) => map['high_blood_pressure'] != null).length;
-          //bloodLowCount = modelsList.where((map) => map['low_blood_pressure'] != null).length;
         });
       });
     });
+  }
+  // 日本語の日付文字列をDateTimeに変換する関数
+  DateTime _parseJapaneseDate(String dateStr) {
+    final RegExp regex = RegExp(r'(\d{4})年(\d{1,2})月(\d{1,2})日');
+    final match = regex.firstMatch(dateStr);
+    if (match != null) {
+      final year = int.parse(match.group(1)!);
+      final month = int.parse(match.group(2)!);
+      final day = int.parse(match.group(3)!);
+      return DateTime(year, month, day);
+    } else {
+      // マッチしない場合のデフォルト値
+      return DateTime(0);
+    }
   }
 }

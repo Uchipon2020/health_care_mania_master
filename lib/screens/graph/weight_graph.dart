@@ -100,6 +100,17 @@ class _WeightGraphState extends State<WeightGraph> {
 
   @override
   Widget build(BuildContext context) {
+    if (weightDataList == null || weightDataList!.isEmpty) {
+      // グラフデータが空の場合、エラーメッセージを表示するか、他の処理を行う
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("グラフ"),
+        ),
+        body: const Center(
+          child: Text("グラフデータがありません。"),
+        ),
+      );
+    }
     List<FlSpot> flSpotList = [];
     for (int i = 0; i < weightDataList!.length; i++) {
       double yValue = weightDataList![i].toDouble();
