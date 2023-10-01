@@ -80,7 +80,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     lEyeController.text = widget.model.left_eye_5;
     lBpController.text = widget.model.low_blood_pressure_11;
     hBpController.text = widget.model.high_blood_pressure_12;
-    onTheDayController.text = widget.model.on_the_day_24;
+    onTheDayController.text = widget.model.on_the_day_24;//登録日
     hR1000Controller.text = widget.model.hearing_right_1000_6;
     hL1000Controller.text = widget.model.hearing_left_1000_7;
     hR4000Controller.text = widget.model.hearing_right_4000_8;
@@ -128,11 +128,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
-    if (onTheDayController.text == null) {
-      onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
+    //onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
         print('$dateFormat');
-      }
+
     }
     return Scaffold(
       appBar: AppBar(
@@ -1519,8 +1518,16 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
 
   void _save() async {
     moveToLastScreen();
-
-    widget.model.date = DateFormat.yMMMd().format(DateTime.now());
+    if (heightController.text.isEmpty &&
+        weightController.text.isEmpty &&
+        rEyeController.text.isEmpty &&
+        lEyeController.text.isEmpty &&
+        // 他のコントローラもここに追加
+        onTheDayController.text.isEmpty) {
+      _showAlertDialog('エラー', 'データがありません');
+      return; // ここでメソッドを終了し、何も処理せずに次の画面に遷移します。
+    }
+    widget.model.date = DateFormat.yMMMd().format(DateTime.now(),);
     debugPrint(widget.model.on_the_day_24);
     int result;
     if (widget.model.id != null) {
