@@ -81,7 +81,6 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
       if (modelViews[i] == '') {
         modelViews[i] = ' -- ';
       }
-      ;
     }
     return Scaffold(
       appBar: AppBar(
@@ -506,7 +505,7 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
                   textAlign: TextAlign.left,
                 ),
                 Text(
-                  'ｈＡ１ｃ：${modelViews[22]!} %',
+                  'HbA1c：${modelViews[22]!} %',
                   style: TextStyle(
                     fontWeight: weightCheck(22),
                   ),

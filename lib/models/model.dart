@@ -103,61 +103,61 @@ class Model {
         this._44_mchc = "",
         this._45_serumIron = "", //血清鉄
         this._46_platelet = "", //血小板
-        this._47_internal = "" ,
+        this._47_internal = "",
       ]);
 
   Model.withId(
       this._id,
       this._date,
       this._priority, [
-        this._1_height = "",
-        this._2_weight = "",
-        this._3_waist = "",
-        this._4_right_eye = "",
-        this._5_left_eye = "",
-        this._6_hearing_right_1000 = "",
-        this._7_hearing_left_1000 = "",
-        this._8_hearing_right_4000 = "",
-        this._9_hearing_left_4000 = "",
-        this._10_x_ray = "",
-        this._11_low_blood_pressure = "",
-        this._12_high_blood_pressure = "",
-        this._13_red_blood = "",
-        this._14_hemoglobin = "",
-        this._15_got = "",
-        this._16_gpt = "",
-        this._17_gtp = "",
-        this._18_ldl = "",
-        this._19_hdl = "",
-        this._20_neutral_fat = "",
-        this._21_blood_glucose = "",
-        this._22_hA1c = "",
-        this._23_ecg = "",
-        this._24_on_the_day = "",
-        this._25_urine = "",
-        this._26_sugar = "",
+        this._1_height,
+        this._2_weight,
+        this._3_waist,
+        this._4_right_eye,
+        this._5_left_eye,
+        this._6_hearing_right_1000,
+        this._7_hearing_left_1000,
+        this._8_hearing_right_4000,
+        this._9_hearing_left_4000,
+        this._10_x_ray,
+        this._11_low_blood_pressure,
+        this._12_high_blood_pressure,
+        this._13_red_blood,
+        this._14_hemoglobin,
+        this._15_got,
+        this._16_gpt,
+        this._17_gtp,
+        this._18_ldl,
+        this._19_hdl,
+        this._20_neutral_fat,
+        this._21_blood_glucose,
+        this._22_hA1c,
+        this._23_ecg,
+        this._24_on_the_day,
+        this._25_urine,
+        this._26_sugar,
         //////////version2
-        this._27_correctedEyesight_right = "", //矯正視力右
-        this._28_correctedEyesight_left = "", //矯正視力左
-        this._29_latentBlood = "", //潜血
-        this._30_bloodInTheStool = "", //便潜血
-        this._31_totalProtein = "", //総蛋白
-        this._32_albumin = "", //アルブミン
-        this._33_totalBilirubin = "", //総ビリルビン
-        this._34_alp = "", //ALP
-        this._35_totalCholesterol = "", //総コレステロール
-        this._36_uricAcid = "", //尿酸
-        this._37_ureaNitrogen = "", //尿素窒素
-        this._38_creatinine = "", //クレアチニン
-        this._39_amylase = "", //アミラーゼ
-        this._40_whiteBloodCell = "", //白血球数
-        this._41_hematocrit = "", //ヘマトクリット
-        this._42_mcv = "",
-        this._43_mch = "",
-        this._44_mchc = "",
-        this._45_serumIron = "", //血清鉄
-        this._46_platelet = "", //血小板
-        this._47_internal = "",
+        this._27_correctedEyesight_right, //矯正視力右
+        this._28_correctedEyesight_left, //矯正視力左
+        this._29_latentBlood, //潜血
+        this._30_bloodInTheStool, //便潜血
+        this._31_totalProtein, //総蛋白
+        this._32_albumin, //アルブミン
+        this._33_totalBilirubin, //総ビリルビン
+        this._34_alp, //ALP
+        this._35_totalCholesterol, //総コレステロール
+        this._36_uricAcid, //尿酸
+        this._37_ureaNitrogen, //尿素窒素
+        this._38_creatinine, //クレアチニン
+        this._39_amylase, //アミラーゼ
+        this._40_whiteBloodCell, //白血球数
+        this._41_hematocrit, //ヘマトクリット
+        this._42_mcv,
+        this._43_mch,
+        this._44_mchc,
+        this._45_serumIron, //血清鉄
+        this._46_platelet, //血小板
+        this._47_internal,
       ]);
 
   int? get id => _id;

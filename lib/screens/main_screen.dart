@@ -19,31 +19,28 @@ class ModelListScreenState extends State<ModelListScreen> {
   DatabaseHelper databaseHelper = DatabaseHelper(); //データを読み込む処理をインスタンス化
   List<Model>? modelList; //Modelクラスの定義全体を、複数記憶する（List）として保持するインスタンスを作成
   List<Model>? modelListWeight;
-  List<Model>? modelListBloodHight;
+  List<Model>? modelListBloodHeight;
   List<Model>? modelListBloodLow;
   int count = 0;
   int weightCount = 0;
   int bloodHeightCount = 0;
   int bloodLowCount = 0;
 
-
-
   @override
   Widget build(BuildContext context) {
-
     if (modelList == null) {
-      //listが空ならば。基本的に最初はからなので、空白のmodelListが作成される
+      //listが空ならば。基本的に最初は空なので、空白のmodelListが作成される
       modelList = <Model>[];
       debugPrint('初期リセットビルド通過');
       updateListView(); //下の、更新メソッド処理
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('HEALTHCARE MANIA'), actions: [
+      appBar: AppBar(title: const Text('HEALTHCARE MANIA'),
+           actions: [
         PopupMenuButton<Text>(
           itemBuilder: (context) {
-            return [
-              const PopupMenuItem(
+            return [const PopupMenuItem(
                 child: Text("設定"),
               ),
             ];
@@ -111,7 +108,7 @@ class ModelListScreenState extends State<ModelListScreen> {
         return Colors.green;
       case 2: //type = "人間ドック";
         return Colors.blue;
-      case 3:
+      case 3:// type = "その他 検査"
         return Colors.yellow;
       default:
         return Colors.amber;
@@ -131,36 +128,22 @@ class ModelListScreenState extends State<ModelListScreen> {
         return const Icon(Icons.keyboard_double_arrow_right);
     }
   }
-
   //画面遷移時の、データ移行を書いた処理
   void navigateToDetail(Model models, String appBarTitle) async {
-    bool result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return ModelDetailScreen(
-            model: models,
-            appBarTitle: appBarTitle,
-          );
-        },
-      ),
+    bool result = await Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ModelDetailScreen(model: models, appBarTitle: appBarTitle,);},),
     );
 
     if (result == true) {
       updateListView();
     }
   }
-
   void navigateToView(Model models, String appBarTitle) async {
     await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
-          return ModelViewScreen2(
-            appBarTitle: appBarTitle,
-            model: models,
-            modelList: modelList!,
-          );
-        },
+          return ModelViewScreen2(appBarTitle: appBarTitle, model: models, modelList: modelList!,);},
+
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const Offset begin = Offset(-1.0, 0.0); // 左から右
           const Offset end = Offset.zero;

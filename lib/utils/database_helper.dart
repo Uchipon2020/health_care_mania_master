@@ -13,14 +13,14 @@ class DatabaseHelper {
 
   String modelTable = 'model_table';
   String colId = 'id';
-  String colHeight = 'height';
-  String colWeight = 'weight';
-  String colEyeR = 'right_eye';
-  String colEyeL = 'left_eye';
-  String colHearingRight1000 = 'hearing_right_1000';
-  String colHearingLeft1000 = 'hearing_left_1000';
-  String colHearingRight4000 = 'hearing_right_4000';
-  String colHearingLeft4000 = 'hearing_left_4000';
+  String col0101 = 'height';
+  String col0102 = 'weight';
+  String col0103 = 'right_eye';
+  String col0104 = 'left_eye';
+  String col0105 = 'hearing_right_1000';
+  String col0106 = 'hearing_left_1000';
+  String col0107 = 'hearing_right_4000';
+  String col0108 = 'hearing_left_4000';
   String colXRay = 'x_ray';
   String colBpLow = 'low_blood_pressure';
   String colBpHeight = 'high_blood_pressure';
@@ -90,10 +90,10 @@ class DatabaseHelper {
   void _createDb(Database db, int version) async {
     await db.execute('CREATE TABLE $modelTable('
         ' $colId INTEGER PRIMARY KEY AUTOINCREMENT, '
-        ' $colHeight TEXT, $colWeight TEXT,'
-        ' $colEyeR TEXT, $colEyeL TEXT,'
-        ' $colHearingRight1000 TEXT, $colHearingLeft1000 TEXT,'
-        ' $colHearingRight4000 TEXT, $colHearingLeft4000 TEXT,'
+        ' $col0101 TEXT, $col0102 TEXT,'
+        ' $col0103 TEXT, $col0104 TEXT,'
+        ' $col0105 TEXT, $col0106 TEXT,'
+        ' $col0107 TEXT, $col0108 TEXT,'
         ' $colXRay TEXT, '
         ' $colBpLow TEXT, $colBpHeight TEXT,'
         ' $colRedBlood TEXT, $colHemoglobin TEXT,'
@@ -141,7 +141,7 @@ class DatabaseHelper {
       await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
       await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
       await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
-      await db.execute('ALTER TABEL $modelTable ADD COLUMN $colInternal TEXT');
+      await db.execute('ALTER TABLE $modelTable ADD COLUMN $colInternal TEXT');
     } catch (e){if (kDebugMode) {
       print("Error during upgrading: $e");
     }}}
