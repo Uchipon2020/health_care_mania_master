@@ -36,20 +36,18 @@ class ModelListScreenState extends State<ModelListScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('HEALTHCARE MANIA'),
-           actions: [
+      appBar: AppBar(title: const Text('HEALTHCARE MANIA'), actions: [
         PopupMenuButton<Text>(
           itemBuilder: (context) {
-            return [const PopupMenuItem(
+            return [
+              const PopupMenuItem(
                 child: Text("設定"),
               ),
             ];
           },
         ),
       ]),
-
       body: getModelListView(),
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
@@ -108,7 +106,7 @@ class ModelListScreenState extends State<ModelListScreen> {
         return Colors.green;
       case 2: //type = "人間ドック";
         return Colors.blue;
-      case 3:// type = "その他 検査"
+      case 3: // type = "その他 検査"
         return Colors.yellow;
       default:
         return Colors.amber;
@@ -128,22 +126,36 @@ class ModelListScreenState extends State<ModelListScreen> {
         return const Icon(Icons.keyboard_double_arrow_right);
     }
   }
+
   //画面遷移時の、データ移行を書いた処理
   void navigateToDetail(Model models, String appBarTitle) async {
-    bool result = await Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ModelDetailScreen(model: models, appBarTitle: appBarTitle,);},),
+    bool result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ModelDetailScreen(
+            model: models,
+            appBarTitle: appBarTitle,
+          );
+        },
+      ),
     );
 
     if (result == true) {
       updateListView();
     }
   }
+
   void navigateToView(Model models, String appBarTitle) async {
     await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
-          return ModelViewScreen2(appBarTitle: appBarTitle, model: models, modelList: modelList!,);},
-
+          return ModelViewScreen2(
+            appBarTitle: appBarTitle,
+            model: models,
+            modelList: modelList!,
+          );
+        },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const Offset begin = Offset(-1.0, 0.0); // 左から右
           const Offset end = Offset.zero;
@@ -173,6 +185,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       });
     });
   }
+
   // 日本語の日付文字列をDateTimeに変換する関数
   DateTime _parseJapaneseDate(String dateStr) {
     final RegExp regex = RegExp(r'(\d{4})年(\d{1,2})月(\d{1,2})日');

@@ -125,13 +125,13 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   }
 
   double _selectedValue = 1.0;
-  double _minValue = 1.0;
-  double _maxValue = 10.0;
+  final double _minValue = 1.0;
+  final double _maxValue = 10.0;
 
 
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
+    TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
 
     /*if (onTheDayController.text == null) {
       onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
@@ -231,7 +231,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 style: textStyle,
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
-                onTap:() => _showDialog() ,
+                //onTap:() => _showDialog() ,
                 onChanged: (value) {
                   debugPrint('Something changed in Description Text Field');
                   updateWeight();
