@@ -12,21 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme =
-    ColorScheme.fromSeed(
-        brightness:
-        MediaQuery.platformBrightnessOf(context),
-        seedColor: Colors.amber);
     return MaterialApp(
         title: 'Health Care Mania',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            colorScheme: colorScheme,
+          useMaterial3: false,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
           floatingActionButtonTheme:
-            FloatingActionButtonThemeData(
-              backgroundColor: colorScheme.tertiary,
-              foregroundColor: colorScheme.onTertiary,
-            )
+           const FloatingActionButtonThemeData(
+              backgroundColor: Colors.amber,
+              foregroundColor: Colors.black
+            ),
         ),
         home:const ModelListScreen(),
         localizationsDelegates:const [

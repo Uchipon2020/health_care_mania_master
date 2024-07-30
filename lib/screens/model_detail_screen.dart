@@ -1267,13 +1267,17 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            _save();
-          });
+            if (widget.model.on_the_day_24 == null || widget.model.on_the_day_24!.isEmpty) {
+              _showAlertDialog('警告', 'データが空です。');
+              //moveToLastScreen();
+            } else {
+              _save();
+          }});
         },
         tooltip: 'save',
         backgroundColor: Colors.greenAccent,
         child: const Icon(Icons.save),
-      ),
+          ),
     );
   }
 
