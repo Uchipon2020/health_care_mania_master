@@ -8,11 +8,10 @@ class ModelViewScreen2 extends StatefulWidget {
   final Model model;
   final List<Model> modelList;
   const ModelViewScreen2(
-      {Key? key,
+      {super.key,
       required this.appBarTitle,
       required this.model,
-      required this.modelList})
-      : super(key: key);
+      required this.modelList});
   @override
   State<ModelViewScreen2> createState() => _ModelViewScreen2State();
 }

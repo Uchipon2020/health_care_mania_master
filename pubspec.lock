@@ -296,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  pod:
+    dependency: "direct main"
+    description:
+      name: pod
+      sha256: "74d7e56bea4cf2d691b7500e374e5765c7ce376e750a4be27a95e0847f5fda21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.0"
   rational:
     dependency: transitive
     description:

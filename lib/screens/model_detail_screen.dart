@@ -569,7 +569,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 //keyboardType:TextInputType.number,
                 onChanged: (value) {
                   debugPrint('Something changed in Title Text Field');
-                  updateEcg();
+                  updateInternal();
                 },
                 decoration: InputDecoration(
                     labelText: '内科診察所見',
@@ -594,7 +594,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateTotalBilirubin();
+                      updateTotalProtein();
                     },
                     decoration: InputDecoration(
                         labelText: '総蛋白',
@@ -639,7 +639,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateEcg();
+                      updateTotalBilirubin();
                     },
                     decoration: InputDecoration(
                         labelText: '総ビリルビン',
@@ -699,7 +699,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateEcg();
+                      updateAlp();
                     },
                     decoration: InputDecoration(
                         labelText: 'ALP',
@@ -832,6 +832,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     decoration: InputDecoration(
                         labelText: '尿酸',
                         labelStyle: textStyle,
+                        suffix: const Text(' mg/dL'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
@@ -874,7 +875,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   decoration: InputDecoration(
                       labelText: '尿糖',
                       labelStyle: textStyle,
-                      //suffix: const Text(' g/dL'),
+                      suffix: const Text(' mg/dL'),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))),
                 ),
@@ -909,7 +910,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     debugPrint('Something changed in Title Text Field');
-                    updateEcg();
+                    updateCreatinine();
                   },
                   decoration: InputDecoration(
                       labelText: 'クレアチニン',
@@ -951,7 +952,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     //keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateEcg();
+                      updateAmylase();
                     },
                     decoration: InputDecoration(
                         labelText: 'アミラーゼ',
@@ -1116,7 +1117,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateEcg();
+                      updateMcv();
                     },
                     decoration: InputDecoration(
                         labelText: 'MCV',
@@ -1176,7 +1177,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     textAlign: TextAlign.right,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
-                      updateEcg();
+                      updateSerumIron();
                     },
                     decoration: InputDecoration(
                         labelText: '血清鉄',
@@ -1268,7 +1269,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
         onPressed: () {
           setState(() {
             if (widget.model.on_the_day_24 == null || widget.model.on_the_day_24!.isEmpty) {
-              _showAlertDialog('警告', 'データが空です。');
+              _showAlertDialog('警告', '受診日入力は必須です。');
               //moveToLastScreen();
             } else {
               _save();
@@ -1393,6 +1394,11 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   void updateEcg() {
     widget.model.ecg_23 = eCgController.text;
   }
+
+  void updateInternal(){
+    widget.model.internal_47 = internalController.text;
+    }
+
 
   void updateLBp() {
     widget.model.low_blood_pressure_11 = lBpController.text;
@@ -1635,7 +1641,7 @@ class _NumberSelectDialogState extends State<NumberSelectDialog> {
       ),
       actions: <Widget>[
         ElevatedButton(
-          child: Text('CANCEL'),
+          child:const Text('CANCEL'),
           onPressed: () {
             Navigator.of(context).pop();
           },
