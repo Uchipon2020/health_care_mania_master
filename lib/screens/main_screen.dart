@@ -8,7 +8,7 @@ import 'model_detail_screen.dart';
 import 'model_view_screen.dart';
 
 class ModelListScreen extends StatefulWidget {
-  const ModelListScreen({Key? key}) : super(key: key);
+  const ModelListScreen({super.key});
   @override
   State<StatefulWidget> createState() {
     return ModelListScreenState();

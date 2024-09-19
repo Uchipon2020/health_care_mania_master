@@ -95,7 +95,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     hDlController.text = widget.model.hdl_19;
     nFatController.text = widget.model.neutral_fat_20;
     bGluController.text = widget.model.blood_glucose_21;
-    hA1cController.text = widget.model.hA1c_22;
+    hA1cController.text = widget.model.HbA1c_22;
     eCgController.text = widget.model.ecg_23;
     sugarController.text = widget.model.sugar_26;
     urineController.text = widget.model.urine_25;
@@ -207,7 +207,9 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
               padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: TextField(
                 controller: heightController,
-                style: textStyle,
+                style: TextStyle(
+                  color: Model.isHeightRedFlag ? Colors.red : (Model.isHeightBlueFlag ? Colors.blue : Colors.black),
+    ),
                 textAlign: TextAlign.right,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
@@ -376,7 +378,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     child: TextField(
                       controller: hR1000Controller,
                       style: textStyle,
-                      //keyboardType:TextInputType.number,
                       onChanged: (value) {
                         debugPrint(
                             'Something changed in Description Text Field');
@@ -478,7 +479,9 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     // 6 Element　血圧（LOW）
                     child: TextField(
                       controller: lBpController,
-                      style: textStyle,
+                      style: TextStyle (
+                        color: Model.isLowBloodRedFlag ?
+                        (Model.isLowBloodBlueFlag ? Colors.black : Colors.blue):Colors.red,),
                       textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -502,7 +505,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     // 7 Element　血圧（High）
                     child: TextField(
                       controller: hBpController,
-                      style: textStyle,
+                      style: TextStyle (
+                        color: Model.isHighBloodRedFlag ?
+                        (Model.isHighBloodBlueFlag ? Colors.black : Colors.blue):Colors.red,),
+                      //keyboardType:TextInputType.number,,
                       textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -824,7 +830,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     controller: uricAcidController,
                     textAlign: TextAlign.right,
                     style: textStyle,
-                    //keyboardType:TextInputType.number,
+                    keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateUricAcid();
@@ -866,8 +872,8 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 child: TextField(
                   controller: sugarController,
                   style: textStyle,
+                  keyboardType: TextInputType.number,
                   textAlign: TextAlign.right,
-                  //keyboardType: TextInputType.number,
                   onChanged: (value) {
                     debugPrint('Something changed in Title Text Field');
                     updateSugar();
@@ -886,7 +892,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   controller: urineController,
                   style: textStyle,
                   textAlign: TextAlign.right,
-                  //keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.number,
                   onChanged: (value) {
                     debugPrint('Something changed in Title Text Field');
                     updateUrine();
@@ -926,7 +932,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 child: TextField(
                   controller: latentBloodController,
                   style: textStyle,
-                  //keyboardType:TextInputType.number,
+                  keyboardType:TextInputType.number,
                   onChanged: (value) {
                     debugPrint('Something changed in Title Text Field');
                     updateLatentBlood();
@@ -948,8 +954,8 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: amylaseController,
                     style: textStyle,
+                    keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
-                    //keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateAmylase();
@@ -1094,7 +1100,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     controller: hematocritController,
                     style: textStyle,
                     textAlign: TextAlign.right,
-                    //keyboardType:TextInputType.number,
+                    keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateHematocrit();
@@ -1154,7 +1160,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     controller: mchcController,
                     style: textStyle,
                     textAlign: TextAlign.right,
-                    //keyboardType:TextInputType.number,
+                    keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateMchc();
@@ -1198,7 +1204,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: plateletController,
                     style: textStyle,
-                    //keyboardType:TextInputType.number,
+                    keyboardType:TextInputType.number,
                     textAlign: TextAlign.right,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
@@ -1227,7 +1233,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: TextField(
                     controller: bloodInTheStoolController,
                     style: textStyle,
-                    //keyboardType:TextInputType.number,
+                    keyboardType:TextInputType.number,
                     onChanged: (value) {
                       debugPrint('Something changed in Title Text Field');
                       updateBloodIn();
@@ -1388,7 +1394,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   }
 
   void updateHA1c() {
-    widget.model.hA1c_22 = hA1cController.text;
+    widget.model.HbA1c_22 = hA1cController.text;
   }
 
   void updateEcg() {

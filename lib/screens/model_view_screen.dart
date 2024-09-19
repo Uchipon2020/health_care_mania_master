@@ -23,7 +23,7 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
   void initState() {
     super.initState();
     modelViews = {
-      99: _priorities[widget.model.priority],
+      99: _priorities[widget.model.priority-1],
       1: widget.model.height_1,
       2: widget.model.weight_2,
       3: widget.model.waist_3,
@@ -45,7 +45,7 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
       19: widget.model.hdl_19,
       20: widget.model.neutral_fat_20,
       21: widget.model.blood_glucose_21,
-      22: widget.model.hA1c_22,
+      22: widget.model.HbA1c_22,
       23: widget.model.ecg_23,
       //24
       25: widget.model.urine_25,
@@ -96,6 +96,8 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
               '身長: ${modelViews[1]!} cm',
               style: TextStyle(
                 fontWeight: weightCheck(1),
+                color: Model.isHeightRedFlag ? Colors.red // 赤色フラグが true の場合は赤
+                    : (Model.isHeightBlueFlag ? Colors.blue : Colors.black), // 青色フラグが true なら青、そうでなければ黒
               ),
             ),
           ),
